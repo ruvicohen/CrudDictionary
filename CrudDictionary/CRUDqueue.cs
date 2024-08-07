@@ -9,49 +9,26 @@ namespace CrudDictionary
 {
     internal class CRUDqueue<T>
     {
-        public Queue<T> _queue;
+        private Queue<T> myQueue = new Queue<T>();
 
-        public CRUDqueue()
+        public void Clear()
         {
-            _queue = new Queue<T>();
+            myQueue.Clear();
         }
 
-        public void Create(T item)
+        public void Enqueue(T value)
         {
-            _queue.Enqueue(item);
+            myQueue.Enqueue(value);
         }
 
-        public IEnumerable<T> Read()
+        public T Dequeue()
         {
-            return _queue.ToList();
+            return myQueue.Dequeue();
         }
 
-        public T Read(int index)
+        public T Peek()
         {
-            if (index < 0 || index >= _queue.Count)
-                throw new ArgumentOutOfRangeException(nameof(index), "Index out of range");
-
-            return _queue.ElementAt(index);
-        }
-
-        public void Update(int index, T newItem)
-        {
-            if (index < 0 || index >= _queue.Count)
-                throw new ArgumentOutOfRangeException(nameof(index), "Index out of range");
-
-            var list = _queue.ToList();
-            list[index] = newItem;
-            _queue = new Queue<T>(list);
-        }
-
-        public void Delete(int index)
-        {
-            if (index < 0 || index >= _queue.Count)
-                throw new ArgumentOutOfRangeException(nameof(index), "Index out of range");
-
-            var list = _queue.ToList();
-            list.RemoveAt(index);
-            _queue = new Queue<T>(list);
+            return myQueue.Peek();
         }
     }
 }
